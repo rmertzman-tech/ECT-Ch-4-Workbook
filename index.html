@@ -1,69 +1,511 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>EBB Canvas HTML Package Index</title>
-<style>
-  body { font-family: Arial, Helvetica, sans-serif; line-height: 1.55; color: #1f2933; max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-  h1 { font-size: 2rem; line-height: 1.2; margin-top: 2rem; border-bottom: 2px solid #d9e2ec; padding-bottom: .35rem; }
-  h2 { font-size: 1.45rem; line-height: 1.25; margin-top: 1.6rem; }
-  h3 { font-size: 1.18rem; margin-top: 1.25rem; }
-  p { margin: .7rem 0; }
-  blockquote { border-left: 4px solid #bcccdc; margin: 1rem 0; padding: .5rem 1rem; background: #f8fafc; font-weight: 600; }
-  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: .95rem; }
-  th, td { border: 1px solid #cbd2d9; padding: .45rem .55rem; vertical-align: top; }
-  th { background: #f0f4f8; text-align: left; }
-  .canvas-note { font-size: .9rem; color: #52606d; border-top: 1px solid #d9e2ec; margin-top: 2rem; padding-top: .75rem; }
-  nav.toc ul { columns: 2; }
-  @media print { body { max-width: none; margin: 0.5in; } nav.toc { display: none; } }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 4 Workbook v1.0 — Use vs Mere Use Workbook</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --panel: #ffffff;
+      --ink: #24211c;
+      --muted: #625c52;
+      --line: #ded7ca;
+      --accent: #6b5541;
+      --accent-dark: #443222;
+      --accent-soft: #f0e7dc;
+      --warn: #7a4f00;
+      --warn-bg: #fff5df;
+      --good-bg: #edf7ec;
+      --shadow: 0 12px 28px rgba(45, 39, 30, 0.10);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f7f5ef 0%, #ebe4d6 100%);
+      line-height: 1.55;
+    }
+    header {
+      background: radial-gradient(circle at top left, #f5eee7, #e6d9cc 55%, #d4c3b2 100%);
+      border-bottom-color: #bfae9e;
+      border-bottom-style: solid;
+      border-bottom-width: 1px;
+      padding: 28px 18px;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; }
+    .hero { display: grid; grid-template-columns: 1.6fr 0.9fr; gap: 20px; align-items: stretch; }
+    .hero-card, .side-card, section {
+      background: rgba(255,255,255,0.94);
+      border-color: var(--line);
+      border-style: solid;
+      border-width: 1px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-card { padding: 26px; }
+    .side-card { padding: 20px; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; font-weight: 800; color: var(--accent-dark); }
+    h1 { margin: 8px 0 10px; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; }
+    h2 { margin-top: 0; color: var(--accent-dark); font-size: 1.55rem; }
+    h3 { color: var(--accent-dark); margin-bottom: 8px; }
+    p { margin-top: 0; }
+    .tagline { font-size: 1.15rem; color: #373228; max-width: 820px; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      border-color: #c9b7a6; border-style: solid; border-width: 1px;
+      border-radius: 999px; padding: 6px 10px; background: #fff8f0;
+      font-size: .88rem; color: var(--accent-dark); font-weight: 650;
+    }
+    .grid { display: grid; grid-template-columns: 260px 1fr; gap: 18px; margin-top: 18px; }
+    nav { position: sticky; top: 12px; align-self: start; }
+    .progress-box {
+      background: var(--panel); border-color: var(--line); border-style: solid; border-width: 1px;
+      border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px;
+    }
+    .bar { height: 12px; background: #e5dfd2; border-radius: 999px; overflow: hidden; margin: 8px 0 8px; }
+    .bar > div { height: 100%; width: 0%; background: var(--accent); transition-property: width; transition-duration: 200ms; transition-timing-function: ease; }
+    .toc { list-style: none; padding: 0; margin: 10px 0 0; }
+    .toc li { margin: 6px 0; }
+    .toc a { color: var(--accent-dark); text-decoration: none; font-weight: 700; font-size: .93rem; }
+    .toc a:hover, .toc a:focus { text-decoration: underline; }
+    main { display: grid; gap: 18px; }
+    section { padding: 22px; }
+    .section-kicker { color: var(--muted); font-weight: 750; margin-bottom: 6px; }
+    .callout {
+      background: var(--accent-soft); border-left-color: var(--accent); border-left-style: solid; border-left-width: 5px;
+      padding: 14px 16px; border-radius: 12px; margin: 14px 0;
+    }
+    .warning {
+      background: var(--warn-bg); border-left-color: var(--warn); border-left-style: solid; border-left-width: 5px;
+      padding: 14px 16px; border-radius: 12px; margin: 14px 0;
+    }
+    .success {
+      background: var(--good-bg); border-left-color: #4d7e46; border-left-style: solid; border-left-width: 5px;
+      padding: 14px 16px; border-radius: 12px; margin: 14px 0;
+    }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    label { display: block; font-weight: 800; margin: 14px 0 6px; color: #2f2a24; }
+    .hint { color: var(--muted); font-size: .92rem; margin-top: -3px; }
+    input[type="text"], select, textarea {
+      width: 100%; font: inherit; color: var(--ink); background: #fffdf8;
+      border-color: #bfb7a8; border-style: solid; border-width: 1px;
+      border-radius: 12px; padding: 10px 12px;
+    }
+    textarea { min-height: 94px; resize: vertical; }
+    input[type="text"]:focus, select:focus, textarea:focus, button:focus {
+      outline-color: #6b5541; outline-style: solid; outline-width: 3px; outline-offset: 2px;
+    }
+    .required-mark { color: #7a2600; }
+    .checkline { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; }
+    .checkline input { margin-top: 5px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    button, .buttonlike {
+      appearance: none; border-color: var(--accent-dark); border-style: solid; border-width: 1px;
+      background: var(--accent); color: #fff; padding: 10px 14px; border-radius: 999px;
+      font-weight: 800; cursor: pointer; text-decoration: none; display: inline-block;
+    }
+    button.secondary { background: #fffdf8; color: var(--accent-dark); }
+    button.danger { background: #7a3b2e; border-color: #5d2a20; }
+    button:hover { filter: brightness(0.97); }
+    .small { font-size: .9rem; color: var(--muted); }
+    .casebox {
+      border-color: #d5cdbc; border-style: solid; border-width: 1px; border-radius: 14px;
+      background: #fffaf0; padding: 16px; margin: 12px 0;
+    }
+    .output {
+      white-space: pre-wrap; background: #1f1d1a; color: #fffaf0; padding: 16px; border-radius: 14px;
+      min-height: 260px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92rem;
+    }
+    footer { padding: 24px 18px 40px; color: var(--muted); text-align: center; }
+    @media (max-width: 860px) {
+      .hero, .grid, .two, .three { grid-template-columns: 1fr; }
+      nav { position: static; }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <div class="wrap hero">
+      <div class="hero-card">
+        <div class="eyebrow">Chapter 4 Workbook v1.0 · Classroom Version</div>
+        <h1>Use vs Mere Use Workbook</h1>
+        <p class="tagline">Practice the Chapter 4 skill: recognizing when a person is being treated as an agent, and when a person is being reduced to a tool.</p>
+        <div class="pill-row" aria-label="Workbook concepts">
+          <span class="pill">Dignity</span>
+          <span class="pill">Person-as-agent</span>
+          <span class="pill">Consent</span>
+          <span class="pill">Privacy</span>
+          <span class="pill">Dignity-preserving repair</span>
+        </div>
+      </div>
+      <aside class="side-card">
+        <h2>Chapter move</h2>
+        <p><strong>Do not reduce a person to a tool.</strong></p>
+        <p class="small">Estimated time: 25–35 minutes. Your work is saved only in this browser unless you export it.</p>
+      </aside>
+    </div>
+  </header>
 
+  <div class="wrap grid">
+    <nav aria-label="Workbook progress">
+      <div class="progress-box">
+        <strong>Progress</strong>
+        <div class="bar" aria-hidden="true"><div id="progressFill"></div></div>
+        <div id="progressText" class="small">0% complete</div>
+        <ol class="toc">
+          <li><a href="#arrive">1. Arrive</a></li>
+          <li><a href="#case">2. Read the Case</a></li>
+          <li><a href="#agent">3. Person-as-Agent</a></li>
+          <li><a href="#mereuse">4. Use vs Mere Use</a></li>
+          <li><a href="#consent">5. Consent, Pressure, Privacy</a></li>
+          <li><a href="#limits">6. Dignity and Limits</a></li>
+          <li><a href="#repair">7. Repair</a></li>
+          <li><a href="#output">8. Output Card</a></li>
+          <li><a href="#complete">9. Complete</a></li>
+        </ol>
+      </div>
+    </nav>
 
-<h1>Ethics and Critical Thinking — Canvas HTML Package</h1>
-<p>This package contains Canvas-friendly standalone HTML files and matching body-only fragments for the finalized textbook.</p>
-<h2>Complete book</h2>
-<ul><li><a href="full_book/EBB_complete_textbook_canvas_preview.html">Complete textbook preview HTML</a></li></ul>
-<h2>Individual pages</h2>
-<table><thead><tr><th>Order</th><th>Section</th><th>Approx. words</th></tr></thead><tbody><tr><td>00</td><td><a href="canvas_pages/00_title-page.html">Title Page</a></td><td>46</td></tr>
-<tr><td>01</td><td><a href="canvas_pages/01_table-of-contents.html">Table of Contents</a></td><td>192</td></tr>
-<tr><td>02</td><td><a href="canvas_pages/02_front-matter.html">Front Matter</a></td><td>118</td></tr>
-<tr><td>03</td><td><a href="canvas_pages/03_preface.html">Preface</a></td><td>997</td></tr>
-<tr><td>04</td><td><a href="canvas_pages/04_how-to-use-this-book.html">How to Use This Book</a></td><td>552</td></tr>
-<tr><td>05</td><td><a href="canvas_pages/05_the-ethics-beyond-boundaries-course-rhythm.html">The Ethics Beyond Boundaries Course Rhythm</a></td><td>238</td></tr>
-<tr><td>06</td><td><a href="canvas_pages/06_a-guide-to-prf-22-the-explainer-and-the-navigator.html">A Guide to PRF-22, the Explainer, and the Navigator</a></td><td>399</td></tr>
-<tr><td>07</td><td><a href="canvas_pages/07_privacy-choice-and-responsible-reflection.html">Privacy, Choice, and Responsible Reflection</a></td><td>267</td></tr>
-<tr><td>08</td><td><a href="canvas_pages/08_course-map-the-twelve-chapter-journey.html">Course Map: The Twelve Chapter Journey</a></td><td>336</td></tr>
-<tr><td>09</td><td><a href="canvas_pages/09_unit-1-seeing-responsibly.html">Unit 1 — Seeing Responsibly</a></td><td>654</td></tr>
-<tr><td>10</td><td><a href="canvas_pages/10_chapter-1.html">Chapter 1</a></td><td>3764</td></tr>
-<tr><td>11</td><td><a href="canvas_pages/11_chapter-2.html">Chapter 2</a></td><td>3498</td></tr>
-<tr><td>12</td><td><a href="canvas_pages/12_chapter-3.html">Chapter 3</a></td><td>3637</td></tr>
-<tr><td>13</td><td><a href="canvas_pages/13_unit-2-preserving-agency.html">Unit 2 — Preserving Agency</a></td><td>732</td></tr>
-<tr><td>14</td><td><a href="canvas_pages/14_chapter-4.html">Chapter 4</a></td><td>3474</td></tr>
-<tr><td>15</td><td><a href="canvas_pages/15_chapter-5.html">Chapter 5</a></td><td>3818</td></tr>
-<tr><td>16</td><td><a href="canvas_pages/16_chapter-6.html">Chapter 6</a></td><td>3456</td></tr>
-<tr><td>17</td><td><a href="canvas_pages/17_unit-3-acting-through-systems.html">Unit 3 — Acting Through Systems</a></td><td>612</td></tr>
-<tr><td>18</td><td><a href="canvas_pages/18_chapter-7.html">Chapter 7</a></td><td>3460</td></tr>
-<tr><td>19</td><td><a href="canvas_pages/19_chapter-8.html">Chapter 8</a></td><td>3577</td></tr>
-<tr><td>20</td><td><a href="canvas_pages/20_chapter-9.html">Chapter 9</a></td><td>3591</td></tr>
-<tr><td>21</td><td><a href="canvas_pages/21_unit-4-repairing-shared-worlds.html">Unit 4 — Repairing Shared Worlds</a></td><td>689</td></tr>
-<tr><td>22</td><td><a href="canvas_pages/22_chapter-10.html">Chapter 10</a></td><td>3305</td></tr>
-<tr><td>23</td><td><a href="canvas_pages/23_chapter-11.html">Chapter 11</a></td><td>3242</td></tr>
-<tr><td>24</td><td><a href="canvas_pages/24_chapter-12.html">Chapter 12</a></td><td>3633</td></tr>
-<tr><td>25</td><td><a href="canvas_pages/25_unit-4-closing-repairing-shared-worlds.html">Unit 4 Closing: Repairing Shared Worlds</a></td><td>207</td></tr>
-<tr><td>26</td><td><a href="canvas_pages/26_back-matter.html">Back Matter</a></td><td>2</td></tr>
-<tr><td>27</td><td><a href="canvas_pages/27_epilogue.html">Epilogue</a></td><td>701</td></tr>
-<tr><td>28</td><td><a href="canvas_pages/28_glossary.html">Glossary</a></td><td>1253</td></tr>
-<tr><td>29</td><td><a href="canvas_pages/29_tool-index.html">Tool Index</a></td><td>1250</td></tr>
-<tr><td>30</td><td><a href="canvas_pages/30_ethics-beyond-boundaries-integration-guide.html">Ethics Beyond Boundaries Integration Guide</a></td><td>635</td></tr>
-<tr><td>32</td><td><a href="canvas_pages/32_optional-instructor-implementation-notes.html">Optional Instructor Implementation Notes</a></td><td>233</td></tr>
-<tr><td>33</td><td><a href="canvas_pages/33_optional-historical-extension-case-map.html">Optional Historical Extension Case Map</a></td><td>372</td></tr>
-<tr><td>34</td><td><a href="canvas_pages/34_chapter-carry-forward-questions.html">Chapter Carry-Forward Questions</a></td><td>148</td></tr>
-<tr><td>35</td><td><a href="canvas_pages/35_personal-ethics-journal-reflection-question-archive.html">Personal Ethics Journal Reflection Question Archive</a></td><td>518</td></tr>
-<tr><td>36</td><td><a href="canvas_pages/36_final-student-portfolio-option.html">Final Student Portfolio Option</a></td><td>171</td></tr></tbody></table>
+    <main>
+      <section id="arrive">
+        <div class="section-kicker">1 · Arrive</div>
+        <h2>Start with dignity, not usefulness</h2>
+        <p>In Chapter 4, you learned that people are not merely instruments for someone else’s goal. We rely on one another all the time, but ethical use must preserve agency, consent, privacy, and dignity.</p>
+        <div class="warning">
+          <strong>Privacy reminder:</strong> You may use the provided case, a fictional example, a public example, a historical example, a composite example, or a low-stakes personal example. Do not disclose private, identifying, or sensitive information.
+        </div>
+        <label class="checkline" for="privacy_ack"><input id="privacy_ack" data-required="true" type="checkbox"> <span>I understand that I should not disclose private, identifying, or sensitive information in this workbook. <span class="required-mark">*</span></span></label>
+      </section>
 
-<div class="canvas-note">Canvas note: This file uses semantic HTML only. You may paste the body content into a Canvas Page using the HTML editor.</div>
+      <section id="case">
+        <div class="section-kicker">2 · Read the Case</div>
+        <h2>The Powerful Story</h2>
+        <div class="casebox">
+          <p><strong>Case:</strong> A student is writing a persuasive essay about housing insecurity. They know a classmate who once described a frightening experience with eviction, family stress, and temporary homelessness. The story would make the essay much stronger. The classmate once said, “You can talk about it if it helps people understand,” but that conversation was informal and private. The student now wants to use vivid details in a class presentation and maybe post the essay online later.</p>
+          <p>The student thinks the cause is important. They also realize the story is not only “evidence.” It belongs to a person who may have boundaries, risks, and a standpoint of their own.</p>
+        </div>
+        <label for="case_first_notice">What stands out first in this case? <span class="required-mark">*</span></label>
+        <textarea id="case_first_notice" data-required="true"></textarea>
+        <label for="case_ethical_concern">What seems ethically concerning? <span class="required-mark">*</span></label>
+        <textarea id="case_ethical_concern" data-required="true"></textarea>
+        <label for="case_quick_judgment">What might a quick judgment miss? <span class="required-mark">*</span></label>
+        <textarea id="case_quick_judgment" data-required="true"></textarea>
+      </section>
+
+      <section id="agent">
+        <div class="section-kicker">3 · Person-as-Agent</div>
+        <h2>Who is the person, not just the tool?</h2>
+        <div class="callout"><strong>Person-as-agent:</strong> a person with a standpoint, choices, vulnerability, boundaries, and some capacity to participate in what happens to them.</div>
+        <label for="person_standpoint">Whose agency needs to be considered in this case? What might their standpoint include? <span class="required-mark">*</span></label>
+        <textarea id="person_standpoint" data-required="true"></textarea>
+        <label for="risk_reduction">How could this person be reduced to a tool, example, symbol, obstacle, or persuasive device? <span class="required-mark">*</span></label>
+        <textarea id="risk_reduction" data-required="true"></textarea>
+      </section>
+
+      <section id="mereuse">
+        <div class="section-kicker">4 · Use vs Mere Use</div>
+        <h2>Apply the Use vs Mere Use Test</h2>
+        <div class="callout"><strong>Use vs mere use:</strong> We may use one another’s help, work, stories, or roles respectfully. Mere use happens when someone’s agency is bypassed and the person is treated only as material for another goal.</div>
+        <label for="use_status">Best current diagnosis <span class="required-mark">*</span></label>
+        <select id="use_status" data-required="true">
+          <option value="">Choose one</option>
+          <option>Respectful use is possible if agency is protected</option>
+          <option>The case risks mere use</option>
+          <option>The case already looks like mere use</option>
+          <option>Unsure — more information is needed</option>
+        </select>
+        <label for="use_reason">Explain your diagnosis. <span class="required-mark">*</span></label>
+        <textarea id="use_reason" data-required="true"></textarea>
+        <label for="benefit_actor">Who benefits from using the story, labor, image, information, or role? <span class="required-mark">*</span></label>
+        <textarea id="benefit_actor" data-required="true"></textarea>
+        <label for="burden_person">What burden, risk, loss of control, or exposure might fall on the person being used? <span class="required-mark">*</span></label>
+        <textarea id="burden_person" data-required="true"></textarea>
+      </section>
+
+      <section id="consent">
+        <div class="section-kicker">5 · Consent, Pressure, Privacy</div>
+        <h2>Check the agency conditions</h2>
+        <div class="two">
+          <div class="callout"><strong>Consent:</strong> meaningful agreement based on understanding, real choice, and a genuine option to refuse.</div>
+          <div class="callout"><strong>Privacy:</strong> a dignity-protecting boundary around information, images, stories, identity, and exposure.</div>
+        </div>
+        <label for="consent_quality">What is known, uncertain, or weak about consent in this case? <span class="required-mark">*</span></label>
+        <textarea id="consent_quality" data-required="true"></textarea>
+        <label for="pressure_manipulation">Is there pressure, manipulation, shame, dependency, or lack of a real exit? Explain. <span class="required-mark">*</span></label>
+        <textarea id="pressure_manipulation" data-required="true"></textarea>
+        <label for="privacy_risk">What privacy or identification risk needs attention? <span class="required-mark">*</span></label>
+        <textarea id="privacy_risk" data-required="true"></textarea>
+      </section>
+
+      <section id="limits">
+        <div class="section-kicker">6 · Dignity and Limits</div>
+        <h2>Do not overclaim</h2>
+        <p>Chapter 4 requires respect and humility. A person’s story may be powerful, but the power of the story does not prove permission, safety, or dignity.</p>
+        <label for="dignity_principle">What dignity principle should guide action here? <span class="required-mark">*</span></label>
+        <textarea id="dignity_principle" data-required="true"></textarea>
+        <label for="responsibility_location">Where does responsibility still belong? <span class="required-mark">*</span></label>
+        <textarea id="responsibility_location" data-required="true"></textarea>
+        <label for="still_cannot_conclude">What still cannot be concluded from the information available? <span class="required-mark">*</span></label>
+        <textarea id="still_cannot_conclude" data-required="true"></textarea>
+      </section>
+
+      <section id="repair">
+        <div class="section-kicker">7 · Repair</div>
+        <h2>Choose a dignity-preserving repair</h2>
+        <p>Repair should restore or protect agency. It should make refusal possible, reduce exposure, and avoid turning apology into an afterthought.</p>
+        <label for="repair_permission">What would need to be asked, clarified, or renegotiated before using the story? <span class="required-mark">*</span></label>
+        <textarea id="repair_permission" data-required="true"></textarea>
+        <label for="repair_route">What could be changed so the goal can be pursued without merely using the person? <span class="required-mark">*</span></label>
+        <textarea id="repair_route" data-required="true"></textarea>
+        <label for="repair_agency">What would count as a small but real dignity-preserving improvement? <span class="required-mark">*</span></label>
+        <textarea id="repair_agency" data-required="true"></textarea>
+      </section>
+
+      <section id="output">
+        <div class="section-kicker">8 · Output Card</div>
+        <h2>Chapter 4 Workbook Output Card</h2>
+        <p>Generate your Output Card after completing the required fields. Your instructor may ask you to paste this card into Canvas or use it for follow-up reflection.</p>
+        <div class="buttons">
+          <button type="button" id="generateBtn">Generate Output Card</button>
+          <button type="button" class="secondary" id="copyBtn">Copy Output Card</button>
+          <button type="button" class="secondary" id="downloadBtn">Download Output Card</button>
+          <button type="button" class="secondary" id="worksheetBtn">Download Worksheet</button>
+        </div>
+        <pre id="outputCard" class="output" aria-live="polite">Your Chapter 4 Output Card will appear here.</pre>
+      </section>
+
+      <section id="complete">
+        <div class="section-kicker">9 · Complete</div>
+        <h2>Completion</h2>
+        <div class="success">
+          You have completed the Chapter 4 Use vs Mere Use Workbook when the progress bar reaches 100% and your Output Card represents your work.
+        </div>
+        <p>Carry this question forward: <strong>Is this person being treated as an agent, or only as a tool for someone else’s goal?</strong></p>
+        <div class="buttons">
+          <button type="button" class="danger" id="clearBtn">Clear saved work from this browser</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    Ethics and Critical Thinking · Chapter 4 Workbook v1.0 · Local-only classroom HTML
+  </footer>
+
+  <script>
+    const STORAGE_KEY = 'ebb_ch4_use_vs_mere_use_workbook_v1';
+    const requiredFields = Array.from(document.querySelectorAll('[data-required="true"]'));
+    const fields = Array.from(document.querySelectorAll('textarea, input[type="text"], select, input[type="checkbox"]'));
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    const outputCard = document.getElementById('outputCard');
+
+    function valueOf(id) {
+      const el = document.getElementById(id);
+      if (!el) return '';
+      if (el.type === 'checkbox') return el.checked ? 'Yes' : 'No';
+      return el.value.trim();
+    }
+
+    function isComplete(el) {
+      if (el.type === 'checkbox') return el.checked;
+      return el.value.trim().length >= 5;
+    }
+
+    function updateProgress() {
+      const complete = requiredFields.filter(isComplete).length;
+      const pct = Math.round((complete / requiredFields.length) * 100);
+      progressFill.style.width = pct + '%';
+      progressText.textContent = pct + '% complete (' + complete + ' of ' + requiredFields.length + ' required responses)';
+    }
+
+    function saveWork() {
+      const data = {};
+      fields.forEach(el => {
+        data[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      updateProgress();
+    }
+
+    function loadWork() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        fields.forEach(el => {
+          if (!(el.id in data)) return;
+          if (el.type === 'checkbox') el.checked = Boolean(data[el.id]);
+          else el.value = data[el.id];
+        });
+      } catch (err) {
+        console.warn('Could not load saved workbook data.', err);
+      }
+      updateProgress();
+    }
+
+    function buildOutputCard() {
+      return `Chapter 4 Workbook Output Card — Use vs Mere Use
+
+Case: The Powerful Story
+
+1. First noticing
+${valueOf('case_first_notice')}
+
+2. Ethical concern
+${valueOf('case_ethical_concern')}
+
+3. What a quick judgment might miss
+${valueOf('case_quick_judgment')}
+
+4. Person-as-agent / standpoint
+${valueOf('person_standpoint')}
+
+5. Risk of reducing the person to a tool
+${valueOf('risk_reduction')}
+
+6. Current use vs mere-use diagnosis
+${valueOf('use_status')}
+
+7. Reason for diagnosis
+${valueOf('use_reason')}
+
+8. Who benefits
+${valueOf('benefit_actor')}
+
+9. Burden or risk on the person being used
+${valueOf('burden_person')}
+
+10. Consent check
+${valueOf('consent_quality')}
+
+11. Pressure / manipulation check
+${valueOf('pressure_manipulation')}
+
+12. Privacy risk
+${valueOf('privacy_risk')}
+
+13. Dignity principle
+${valueOf('dignity_principle')}
+
+14. Where responsibility still belongs
+${valueOf('responsibility_location')}
+
+15. What still cannot be concluded
+${valueOf('still_cannot_conclude')}
+
+16. Permission or clarification needed
+${valueOf('repair_permission')}
+
+17. Dignity-preserving route change
+${valueOf('repair_route')}
+
+18. Small but real improvement
+${valueOf('repair_agency')}
+
+Completion note: This Output Card practices the Chapter 4 skill of asking whether a person is being respected as an agent or merely used as a tool.`;
+    }
+
+    function downloadText(filename, text) {
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function buildWorksheet() {
+      return `Chapter 4 Worksheet — Use vs Mere Use Workbook
+
+Privacy reminder: Do not disclose private, identifying, or sensitive information.
+
+1. What stands out first in The Powerful Story?
+
+2. What seems ethically concerning?
+
+3. What might a quick judgment miss?
+
+4. Whose agency needs to be considered? What might their standpoint include?
+
+5. How could this person be reduced to a tool, example, symbol, obstacle, or persuasive device?
+
+6. Is this respectful use, a risk of mere use, already mere use, or unsure? Explain.
+
+7. Who benefits from using the story, labor, image, information, or role?
+
+8. What burden, risk, loss of control, or exposure might fall on the person being used?
+
+9. What is known, uncertain, or weak about consent?
+
+10. Is there pressure, manipulation, shame, dependency, or lack of a real exit?
+
+11. What privacy or identification risk needs attention?
+
+12. What dignity principle should guide action here?
+
+13. Where does responsibility still belong?
+
+14. What still cannot be concluded from the information available?
+
+15. What would need to be asked, clarified, or renegotiated before using the story?
+
+16. What could be changed so the goal can be pursued without merely using the person?
+
+17. What would count as a small but real dignity-preserving improvement?
+`;
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', () => {
+      outputCard.textContent = buildOutputCard();
+      saveWork();
+    });
+
+    document.getElementById('copyBtn').addEventListener('click', async () => {
+      if (outputCard.textContent.startsWith('Your Chapter 4')) outputCard.textContent = buildOutputCard();
+      try {
+        await navigator.clipboard.writeText(outputCard.textContent);
+        alert('Output Card copied.');
+      } catch (err) {
+        alert('Copy failed. You can select and copy the text manually.');
+      }
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const text = outputCard.textContent.startsWith('Your Chapter 4') ? buildOutputCard() : outputCard.textContent;
+      downloadText('chapter4_use_vs_mere_use_output_card.txt', text);
+    });
+
+    document.getElementById('worksheetBtn').addEventListener('click', () => {
+      downloadText('chapter4_use_vs_mere_use_worksheet.txt', buildWorksheet());
+    });
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      if (!confirm('Clear saved Chapter 4 workbook responses from this browser?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      fields.forEach(el => {
+        if (el.type === 'checkbox') el.checked = false;
+        else el.value = '';
+      });
+      outputCard.textContent = 'Your Chapter 4 Output Card will appear here.';
+      updateProgress();
+    });
+
+    fields.forEach(el => {
+      el.addEventListener('input', saveWork);
+      el.addEventListener('change', saveWork);
+    });
+
+    loadWork();
+  </script>
 </body>
 </html>
