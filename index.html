@@ -1,511 +1,410 @@
-<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chapter 4 Workbook v1.0 — Use vs Mere Use Workbook</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Chapter 4 Workbook v2.0 — Persons, Duties, Dignity</title>
+<meta content="Accessible Chapter 4 workbook rebuilt on the finalized chapter text: Bishop Saad Sirop Hanna, BioBond tested, Kant's Humanity Formula, Coherence vs Truth, Assembly History, and the process trail." name="description"/>
+<style>
     :root {
-      --bg: #f7f5ef;
-      --panel: #ffffff;
-      --ink: #24211c;
-      --muted: #625c52;
-      --line: #ded7ca;
-      --accent: #6b5541;
-      --accent-dark: #443222;
-      --accent-soft: #f0e7dc;
-      --warn: #7a4f00;
-      --warn-bg: #fff5df;
-      --good-bg: #edf7ec;
-      --shadow: 0 12px 28px rgba(45, 39, 30, 0.10);
-      --radius: 18px;
+      --bg:#f7f5ef; --panel:#ffffff; --ink:#24211c; --muted:#625c52; --line:#ded7ca;
+      --accent:#6b5541; --accent-dark:#443222; --accent-soft:#f0e7dc;
+      --danger:#7a3b2e; --good-bg:#edf7ec; --shadow:0 12px 28px rgba(45,39,30,0.10); --radius:18px;
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--ink);
-      background: linear-gradient(180deg, #f7f5ef 0%, #ebe4d6 100%);
-      line-height: 1.55;
-    }
-    header {
-      background: radial-gradient(circle at top left, #f5eee7, #e6d9cc 55%, #d4c3b2 100%);
-      border-bottom-color: #bfae9e;
-      border-bottom-style: solid;
-      border-bottom-width: 1px;
-      padding: 28px 18px;
-    }
-    .wrap { max-width: 1120px; margin: 0 auto; }
-    .hero { display: grid; grid-template-columns: 1.6fr 0.9fr; gap: 20px; align-items: stretch; }
-    .hero-card, .side-card, section {
-      background: rgba(255,255,255,0.94);
-      border-color: var(--line);
-      border-style: solid;
-      border-width: 1px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    .hero-card { padding: 26px; }
-    .side-card { padding: 20px; }
-    .eyebrow { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; font-weight: 800; color: var(--accent-dark); }
-    h1 { margin: 8px 0 10px; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1.05; }
-    h2 { margin-top: 0; color: var(--accent-dark); font-size: 1.55rem; }
-    h3 { color: var(--accent-dark); margin-bottom: 8px; }
-    p { margin-top: 0; }
-    .tagline { font-size: 1.15rem; color: #373228; max-width: 820px; }
-    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      border-color: #c9b7a6; border-style: solid; border-width: 1px;
-      border-radius: 999px; padding: 6px 10px; background: #fff8f0;
-      font-size: .88rem; color: var(--accent-dark); font-weight: 650;
-    }
-    .grid { display: grid; grid-template-columns: 260px 1fr; gap: 18px; margin-top: 18px; }
-    nav { position: sticky; top: 12px; align-self: start; }
-    .progress-box {
-      background: var(--panel); border-color: var(--line); border-style: solid; border-width: 1px;
-      border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px;
-    }
-    .bar { height: 12px; background: #e5dfd2; border-radius: 999px; overflow: hidden; margin: 8px 0 8px; }
-    .bar > div { height: 100%; width: 0%; background: var(--accent); transition-property: width; transition-duration: 200ms; transition-timing-function: ease; }
-    .toc { list-style: none; padding: 0; margin: 10px 0 0; }
-    .toc li { margin: 6px 0; }
-    .toc a { color: var(--accent-dark); text-decoration: none; font-weight: 700; font-size: .93rem; }
-    .toc a:hover, .toc a:focus { text-decoration: underline; }
-    main { display: grid; gap: 18px; }
-    section { padding: 22px; }
-    .section-kicker { color: var(--muted); font-weight: 750; margin-bottom: 6px; }
-    .callout {
-      background: var(--accent-soft); border-left-color: var(--accent); border-left-style: solid; border-left-width: 5px;
-      padding: 14px 16px; border-radius: 12px; margin: 14px 0;
-    }
-    .warning {
-      background: var(--warn-bg); border-left-color: var(--warn); border-left-style: solid; border-left-width: 5px;
-      padding: 14px 16px; border-radius: 12px; margin: 14px 0;
-    }
-    .success {
-      background: var(--good-bg); border-left-color: #4d7e46; border-left-style: solid; border-left-width: 5px;
-      padding: 14px 16px; border-radius: 12px; margin: 14px 0;
-    }
-    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-    .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-    label { display: block; font-weight: 800; margin: 14px 0 6px; color: #2f2a24; }
-    .hint { color: var(--muted); font-size: .92rem; margin-top: -3px; }
-    input[type="text"], select, textarea {
-      width: 100%; font: inherit; color: var(--ink); background: #fffdf8;
-      border-color: #bfb7a8; border-style: solid; border-width: 1px;
-      border-radius: 12px; padding: 10px 12px;
-    }
-    textarea { min-height: 94px; resize: vertical; }
-    input[type="text"]:focus, select:focus, textarea:focus, button:focus {
-      outline-color: #6b5541; outline-style: solid; outline-width: 3px; outline-offset: 2px;
-    }
-    .required-mark { color: #7a2600; }
-    .checkline { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; }
-    .checkline input { margin-top: 5px; }
-    .buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-    button, .buttonlike {
-      appearance: none; border-color: var(--accent-dark); border-style: solid; border-width: 1px;
-      background: var(--accent); color: #fff; padding: 10px 14px; border-radius: 999px;
-      font-weight: 800; cursor: pointer; text-decoration: none; display: inline-block;
-    }
-    button.secondary { background: #fffdf8; color: var(--accent-dark); }
-    button.danger { background: #7a3b2e; border-color: #5d2a20; }
-    button:hover { filter: brightness(0.97); }
-    .small { font-size: .9rem; color: var(--muted); }
-    .casebox {
-      border-color: #d5cdbc; border-style: solid; border-width: 1px; border-radius: 14px;
-      background: #fffaf0; padding: 16px; margin: 12px 0;
-    }
-    .output {
-      white-space: pre-wrap; background: #1f1d1a; color: #fffaf0; padding: 16px; border-radius: 14px;
-      min-height: 260px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92rem;
-    }
-    footer { padding: 24px 18px 40px; color: var(--muted); text-align: center; }
-    @media (max-width: 860px) {
-      .hero, .grid, .two, .three { grid-template-columns: 1fr; }
-      nav { position: static; }
-    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--ink); background:linear-gradient(180deg,#f7f5ef 0%,#ebe4d6 100%); line-height:1.55; }
+    header { background:radial-gradient(circle at top left,#f5eee7,#e6d9cc 55%,#d4c3b2 100%); border-bottom:1px solid #bfae9e; padding:28px 18px; }
+    .wrap { max-width:1120px; margin:0 auto; }
+    .hero { display:grid; grid-template-columns:1.6fr 0.9fr; gap:20px; align-items:stretch; }
+    .hero-card, .side-card, section { background:rgba(255,255,255,0.94); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); }
+    .hero-card { padding:26px; } .side-card { padding:20px; }
+    .eyebrow { text-transform:uppercase; letter-spacing:.08em; font-size:.78rem; font-weight:800; color:var(--accent-dark); }
+    h1 { margin:8px 0 10px; font-size:clamp(2rem,4vw,3.5rem); line-height:1.05; }
+    h2 { margin-top:0; color:var(--accent-dark); font-size:1.55rem; }
+    h3 { color:var(--accent-dark); margin-bottom:8px; }
+    p { margin-top:0; }
+    .tagline { font-size:1.15rem; color:#373228; max-width:820px; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+    .pill { display:inline-flex; align-items:center; gap:6px; border:1px solid #c9b7a6; border-radius:999px; padding:6px 10px; background:#fff8f0; font-size:.88rem; color:var(--accent-dark); font-weight:650; }
+    .grid { display:grid; grid-template-columns:260px 1fr; gap:18px; margin-top:18px; }
+    nav { position:sticky; top:12px; align-self:start; }
+    .progress-box { background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; }
+    .bar { height:12px; background:#e5dfd2; border-radius:999px; overflow:hidden; margin:8px 0; }
+    .bar > div { height:100%; width:0%; background:var(--accent); transition:width 200ms ease; }
+    .toc { list-style:none; padding:0; margin:10px 0 0; }
+    .toc li { margin:6px 0; }
+    .toc a { color:var(--accent-dark); text-decoration:none; font-weight:700; font-size:.93rem; }
+    .toc a:hover, .toc a:focus { text-decoration:underline; }
+    main { display:grid; gap:18px; }
+    section { padding:22px; }
+    .section-kicker { color:var(--muted); font-weight:750; margin-bottom:6px; }
+    .callout, .warning, .success, .casebox, .stop-box { border-style:solid; border-width:1px; border-radius:14px; padding:16px; margin:14px 0; }
+    .callout { background:var(--accent-soft); border-left:5px solid var(--accent); border-color:var(--line); }
+    .warning { background:#fff5df; border-left:5px solid #7a4f00; border-color:#e9d6a6; }
+    .success { background:var(--good-bg); border-left:5px solid #4d7e46; border-color:#c9e0c4; }
+    .casebox { background:#fffaf0; border-color:#d5cdbc; }
+    .stop-box { background:#fff0ee; border:2px solid var(--danger); }
+    .stop-box strong.stop-label { color:var(--danger); text-transform:uppercase; letter-spacing:.04em; font-size:.85rem; }
+    .two { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    label { display:block; font-weight:800; margin:14px 0 6px; color:#2f2a24; }
+    .hint { color:var(--muted); font-size:.92rem; margin-top:-3px; }
+    textarea, select { width:100%; font:inherit; color:var(--ink); background:#fffdf8; border:1px solid #bfb7a8; border-radius:12px; padding:10px 12px; }
+    textarea { min-height:94px; resize:vertical; }
+    textarea:focus, select:focus, button:focus { outline:3px solid var(--accent-dark); outline-offset:2px; }
+    textarea[aria-invalid="true"], select[aria-invalid="true"] { border-color:var(--danger); background:#fff7f5; }
+    .checkline { display:flex; gap:10px; align-items:flex-start; margin:12px 0; padding:12px; background:#fff8f0; border:1px solid #c9b7a6; border-radius:12px; }
+    .checkline input { margin-top:5px; }
+    .zero-credit { display:block; margin-top:4px; color:var(--muted); font-weight:500; font-size:.88rem; }
+    .buttons { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+    button { border:1px solid var(--accent-dark); border-radius:999px; background:var(--accent); color:#fff; padding:10px 14px; font:inherit; font-weight:800; cursor:pointer; }
+    button.secondary { background:#fffdf8; color:var(--accent-dark); }
+    button.danger { background:var(--danger); border-color:#5d2a20; }
+    button:hover { filter:brightness(0.97); }
+    .small { font-size:.9rem; color:var(--muted); }
+    .error-inline { display:none; margin-top:6px; color:var(--danger); font-weight:700; font-size:.92rem; }
+    .error-summary { display:none; background:#fff5f3; border:2px solid var(--danger); border-radius:14px; padding:14px 16px; margin:14px 0; }
+    .error-summary h3 { color:var(--danger); margin-bottom:6px; }
+    #outputText { min-height:340px; font-family: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.9rem; }
+    footer { padding:24px 18px 40px; color:var(--muted); text-align:center; }
+    blockquote { margin:10px 0; padding:10px 14px; border-left:4px solid var(--accent); background:#fffdf8; border-radius:8px; font-weight:700; }
+    @media (max-width:860px) { .hero,.grid,.two { grid-template-columns:1fr; } nav { position:static; } }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap hero">
-      <div class="hero-card">
-        <div class="eyebrow">Chapter 4 Workbook v1.0 · Classroom Version</div>
-        <h1>Use vs Mere Use Workbook</h1>
-        <p class="tagline">Practice the Chapter 4 skill: recognizing when a person is being treated as an agent, and when a person is being reduced to a tool.</p>
-        <div class="pill-row" aria-label="Workbook concepts">
-          <span class="pill">Dignity</span>
-          <span class="pill">Person-as-agent</span>
-          <span class="pill">Consent</span>
-          <span class="pill">Privacy</span>
-          <span class="pill">Dignity-preserving repair</span>
-        </div>
+<header>
+  <div class="wrap hero">
+    <div class="hero-card">
+      <div class="eyebrow">Chapter 4 Workbook · Persons, Duties, Dignity · v2.0</div>
+      <h1>Persons, Duties, Dignity</h1>
+      <p class="tagline"><strong>Bishop Saad Sirop Hanna's real case</strong>, BioBond tested at its hardest, Kant's Humanity Formula, and the difference between a coherent map and a true one — with a genuine process trail.</p>
+      <div class="pill-row">
+        <span class="pill">Case: Bishop Saad Sirop Hanna</span>
+        <span class="pill">BioBond, tested</span>
+        <span class="pill">Kant's Humanity Formula</span>
+        <span class="pill">Coherence vs. Truth</span>
       </div>
-      <aside class="side-card">
-        <h2>Chapter move</h2>
-        <p><strong>Do not reduce a person to a tool.</strong></p>
-        <p class="small">Estimated time: 25–35 minutes. Your work is saved only in this browser unless you export it.</p>
-      </aside>
     </div>
-  </header>
-
-  <div class="wrap grid">
-    <nav aria-label="Workbook progress">
-      <div class="progress-box">
-        <strong>Progress</strong>
-        <div class="bar" aria-hidden="true"><div id="progressFill"></div></div>
-        <div id="progressText" class="small">0% complete</div>
-        <ol class="toc">
-          <li><a href="#arrive">1. Arrive</a></li>
-          <li><a href="#case">2. Read the Case</a></li>
-          <li><a href="#agent">3. Person-as-Agent</a></li>
-          <li><a href="#mereuse">4. Use vs Mere Use</a></li>
-          <li><a href="#consent">5. Consent, Pressure, Privacy</a></li>
-          <li><a href="#limits">6. Dignity and Limits</a></li>
-          <li><a href="#repair">7. Repair</a></li>
-          <li><a href="#output">8. Output Card</a></li>
-          <li><a href="#complete">9. Complete</a></li>
-        </ol>
-      </div>
-    </nav>
-
-    <main>
-      <section id="arrive">
-        <div class="section-kicker">1 · Arrive</div>
-        <h2>Start with dignity, not usefulness</h2>
-        <p>In Chapter 4, you learned that people are not merely instruments for someone else’s goal. We rely on one another all the time, but ethical use must preserve agency, consent, privacy, and dignity.</p>
-        <div class="warning">
-          <strong>Privacy reminder:</strong> You may use the provided case, a fictional example, a public example, a historical example, a composite example, or a low-stakes personal example. Do not disclose private, identifying, or sensitive information.
-        </div>
-        <label class="checkline" for="privacy_ack"><input id="privacy_ack" data-required="true" type="checkbox"> <span>I understand that I should not disclose private, identifying, or sensitive information in this workbook. <span class="required-mark">*</span></span></label>
-      </section>
-
-      <section id="case">
-        <div class="section-kicker">2 · Read the Case</div>
-        <h2>The Powerful Story</h2>
-        <div class="casebox">
-          <p><strong>Case:</strong> A student is writing a persuasive essay about housing insecurity. They know a classmate who once described a frightening experience with eviction, family stress, and temporary homelessness. The story would make the essay much stronger. The classmate once said, “You can talk about it if it helps people understand,” but that conversation was informal and private. The student now wants to use vivid details in a class presentation and maybe post the essay online later.</p>
-          <p>The student thinks the cause is important. They also realize the story is not only “evidence.” It belongs to a person who may have boundaries, risks, and a standpoint of their own.</p>
-        </div>
-        <label for="case_first_notice">What stands out first in this case? <span class="required-mark">*</span></label>
-        <textarea id="case_first_notice" data-required="true"></textarea>
-        <label for="case_ethical_concern">What seems ethically concerning? <span class="required-mark">*</span></label>
-        <textarea id="case_ethical_concern" data-required="true"></textarea>
-        <label for="case_quick_judgment">What might a quick judgment miss? <span class="required-mark">*</span></label>
-        <textarea id="case_quick_judgment" data-required="true"></textarea>
-      </section>
-
-      <section id="agent">
-        <div class="section-kicker">3 · Person-as-Agent</div>
-        <h2>Who is the person, not just the tool?</h2>
-        <div class="callout"><strong>Person-as-agent:</strong> a person with a standpoint, choices, vulnerability, boundaries, and some capacity to participate in what happens to them.</div>
-        <label for="person_standpoint">Whose agency needs to be considered in this case? What might their standpoint include? <span class="required-mark">*</span></label>
-        <textarea id="person_standpoint" data-required="true"></textarea>
-        <label for="risk_reduction">How could this person be reduced to a tool, example, symbol, obstacle, or persuasive device? <span class="required-mark">*</span></label>
-        <textarea id="risk_reduction" data-required="true"></textarea>
-      </section>
-
-      <section id="mereuse">
-        <div class="section-kicker">4 · Use vs Mere Use</div>
-        <h2>Apply the Use vs Mere Use Test</h2>
-        <div class="callout"><strong>Use vs mere use:</strong> We may use one another’s help, work, stories, or roles respectfully. Mere use happens when someone’s agency is bypassed and the person is treated only as material for another goal.</div>
-        <label for="use_status">Best current diagnosis <span class="required-mark">*</span></label>
-        <select id="use_status" data-required="true">
-          <option value="">Choose one</option>
-          <option>Respectful use is possible if agency is protected</option>
-          <option>The case risks mere use</option>
-          <option>The case already looks like mere use</option>
-          <option>Unsure — more information is needed</option>
-        </select>
-        <label for="use_reason">Explain your diagnosis. <span class="required-mark">*</span></label>
-        <textarea id="use_reason" data-required="true"></textarea>
-        <label for="benefit_actor">Who benefits from using the story, labor, image, information, or role? <span class="required-mark">*</span></label>
-        <textarea id="benefit_actor" data-required="true"></textarea>
-        <label for="burden_person">What burden, risk, loss of control, or exposure might fall on the person being used? <span class="required-mark">*</span></label>
-        <textarea id="burden_person" data-required="true"></textarea>
-      </section>
-
-      <section id="consent">
-        <div class="section-kicker">5 · Consent, Pressure, Privacy</div>
-        <h2>Check the agency conditions</h2>
-        <div class="two">
-          <div class="callout"><strong>Consent:</strong> meaningful agreement based on understanding, real choice, and a genuine option to refuse.</div>
-          <div class="callout"><strong>Privacy:</strong> a dignity-protecting boundary around information, images, stories, identity, and exposure.</div>
-        </div>
-        <label for="consent_quality">What is known, uncertain, or weak about consent in this case? <span class="required-mark">*</span></label>
-        <textarea id="consent_quality" data-required="true"></textarea>
-        <label for="pressure_manipulation">Is there pressure, manipulation, shame, dependency, or lack of a real exit? Explain. <span class="required-mark">*</span></label>
-        <textarea id="pressure_manipulation" data-required="true"></textarea>
-        <label for="privacy_risk">What privacy or identification risk needs attention? <span class="required-mark">*</span></label>
-        <textarea id="privacy_risk" data-required="true"></textarea>
-      </section>
-
-      <section id="limits">
-        <div class="section-kicker">6 · Dignity and Limits</div>
-        <h2>Do not overclaim</h2>
-        <p>Chapter 4 requires respect and humility. A person’s story may be powerful, but the power of the story does not prove permission, safety, or dignity.</p>
-        <label for="dignity_principle">What dignity principle should guide action here? <span class="required-mark">*</span></label>
-        <textarea id="dignity_principle" data-required="true"></textarea>
-        <label for="responsibility_location">Where does responsibility still belong? <span class="required-mark">*</span></label>
-        <textarea id="responsibility_location" data-required="true"></textarea>
-        <label for="still_cannot_conclude">What still cannot be concluded from the information available? <span class="required-mark">*</span></label>
-        <textarea id="still_cannot_conclude" data-required="true"></textarea>
-      </section>
-
-      <section id="repair">
-        <div class="section-kicker">7 · Repair</div>
-        <h2>Choose a dignity-preserving repair</h2>
-        <p>Repair should restore or protect agency. It should make refusal possible, reduce exposure, and avoid turning apology into an afterthought.</p>
-        <label for="repair_permission">What would need to be asked, clarified, or renegotiated before using the story? <span class="required-mark">*</span></label>
-        <textarea id="repair_permission" data-required="true"></textarea>
-        <label for="repair_route">What could be changed so the goal can be pursued without merely using the person? <span class="required-mark">*</span></label>
-        <textarea id="repair_route" data-required="true"></textarea>
-        <label for="repair_agency">What would count as a small but real dignity-preserving improvement? <span class="required-mark">*</span></label>
-        <textarea id="repair_agency" data-required="true"></textarea>
-      </section>
-
-      <section id="output">
-        <div class="section-kicker">8 · Output Card</div>
-        <h2>Chapter 4 Workbook Output Card</h2>
-        <p>Generate your Output Card after completing the required fields. Your instructor may ask you to paste this card into Canvas or use it for follow-up reflection.</p>
-        <div class="buttons">
-          <button type="button" id="generateBtn">Generate Output Card</button>
-          <button type="button" class="secondary" id="copyBtn">Copy Output Card</button>
-          <button type="button" class="secondary" id="downloadBtn">Download Output Card</button>
-          <button type="button" class="secondary" id="worksheetBtn">Download Worksheet</button>
-        </div>
-        <pre id="outputCard" class="output" aria-live="polite">Your Chapter 4 Output Card will appear here.</pre>
-      </section>
-
-      <section id="complete">
-        <div class="section-kicker">9 · Complete</div>
-        <h2>Completion</h2>
-        <div class="success">
-          You have completed the Chapter 4 Use vs Mere Use Workbook when the progress bar reaches 100% and your Output Card represents your work.
-        </div>
-        <p>Carry this question forward: <strong>Is this person being treated as an agent, or only as a tool for someone else’s goal?</strong></p>
-        <div class="buttons">
-          <button type="button" class="danger" id="clearBtn">Clear saved work from this browser</button>
-        </div>
-      </section>
-    </main>
+    <aside class="side-card">
+      <h2>What this workbook does</h2>
+      <p><strong>Ethics skill:</strong> Distinguish raw capacity from permitted expression, and coherence from truth.</p>
+      <p><strong>Output:</strong> A Chapter 4 Workbook Output Card.</p>
+      <p class="small">Estimated time: 30–40 minutes. Saved only in this browser unless exported.</p>
+    </aside>
   </div>
+</header>
+<div class="wrap grid">
+  <nav aria-label="Workbook progress">
+    <div class="progress-box">
+      <strong>Progress</strong>
+      <div class="bar" aria-hidden="true"><div id="barFill"></div></div>
+      <div id="progressText" class="small">0 of 12 required responses completed.</div>
+      <ol class="toc">
+        <li><a href="#arrive">1. Arrive</a></li>
+        <li><a href="#case">2. Bishop Saad Sirop Hanna</a></li>
+        <li><a href="#gap">3. The Suppression Gap, at Its Most Extreme</a></li>
+        <li><a href="#biobond">4. BioBond, Tested</a></li>
+        <li><a href="#kant">5. Kant's Humanity Formula</a></li>
+        <li><a href="#before">6. Before You Reason It Through</a></li>
+        <li><a href="#coherence">7. Coherence Is Not the Same Thing as Truth</a></li>
+        <li><a href="#assembly">8. Assembly History</a></li>
+        <li><a href="#after">9. After Working Through It</a></li>
+        <li><a href="#revision">10. The Revision Check</a></li>
+        <li><a href="#output">11. Output Card</a></li>
+      </ol>
+      <div class="buttons">
+        <button type="button" class="secondary" id="downloadWorksheet">Download worksheet</button>
+        <button type="button" class="secondary" id="saveBtn">Save now</button>
+        <button type="button" class="danger" id="clearBtn">Clear my responses</button>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <section id="arrive">
+      <div class="section-kicker">1 · Arrive</div>
+      <h2>Feeling certain is not the same as being right</h2>
+      <p>This chapter is about a man whose convictions were tested more completely than almost anyone's ever are — and about the difference between a belief system that holds together perfectly on the inside, and one that actually matches the world outside it.</p>
+      <div class="warning"><strong>Privacy:</strong> This workbook asks about a conviction you hold with real certainty. Use a real one if you're comfortable, or keep it general. Do not disclose anything you don't want to submit.</div>
+      <div class="checkline">
+        <input type="checkbox" id="privacyAck" data-required="true" aria-describedby="privacyAck_error">
+        <label for="privacyAck">I understand this workbook is for practicing the chapter's skills, not for disclosing private information.</label>
+      </div>
+      <p class="error-inline" id="privacyAck_error">Please check this box before continuing.</p>
+    </section>
 
-  <footer>
-    Ethics and Critical Thinking · Chapter 4 Workbook v1.0 · Local-only classroom HTML
-  </footer>
+    <section id="case">
+      <div class="section-kicker">2 · Bishop Saad Sirop Hanna</div>
+      <h2>Twenty-eight days</h2>
+      <div class="casebox">
+        <p>Saad Sirop Hanna was a Chaldean Catholic priest in Baghdad. On August 15, 2006, after celebrating Mass, he was kidnapped by militants. He was held for twenty-eight days — beaten, held blindfolded in solitary confinement, subjected to a mock execution at a riverbank. He attempted escape by swimming the Tigris River, was recaptured, and was severely punished for it.</p>
+        <p>Throughout, his answer to his captors' central demand did not change: <blockquote>"I will not become a Muslim, and I fully know that you are going to kill me for it."</blockquote></p>
+        <p>He was released on September 11, 2006, after a ransom effort mobilized by Catholic and Chaldean Church leadership across multiple countries — significant enough that Pope Benedict XVI publicly prayed for his release. In 2009, despite the danger, Hanna returned to Iraq to continue serving Iraqi Christians. He was consecrated bishop in 2014.</p>
+        <p>This case is not offered as proof that individual conviction alone is enough to survive anything. Hanna's survival depended on family standing, Church institutional resources, and an international mobilization most people do not have access to.</p>
+      </div>
+      <label for="case_read">Prompt 2.1 — In your own words</label>
+      <p class="hint">What does this case ask you not to conclude from it — and why does that caution matter?</p>
+      <textarea id="case_read" data-required="true" aria-describedby="case_read_error"></textarea>
+      <p class="error-inline" id="case_read_error">This still needs a response.</p>
+    </section>
 
-  <script>
-    const STORAGE_KEY = 'ebb_ch4_use_vs_mere_use_workbook_v1';
-    const requiredFields = Array.from(document.querySelectorAll('[data-required="true"]'));
-    const fields = Array.from(document.querySelectorAll('textarea, input[type="text"], select, input[type="checkbox"]'));
-    const progressFill = document.getElementById('progressFill');
-    const progressText = document.getElementById('progressText');
-    const outputCard = document.getElementById('outputCard');
+    <section id="gap">
+      <div class="section-kicker">3 · The Suppression Gap, at Its Most Extreme</div>
+      <h2>Raw capacity vs. permitted expression</h2>
+      <p>Hanna's raw capacity — his convictions, his composure, his sense of who he was — did not waver once across twenty-eight days. What collapsed was not his capacity. It was his permitted expression: his ability to act on that capacity, to reach anyone outside the room he was held in.</p>
+      <label for="gap_distinction">Prompt 3.1 — Name the distinction in your own words</label>
+      <p class="hint">Why are "what a person could do" and "what a person is currently permitted to do" not the same measurement?</p>
+      <textarea id="gap_distinction" data-required="true" aria-describedby="gap_distinction_error"></textarea>
+      <p class="error-inline" id="gap_distinction_error">This still needs a response.</p>
+    </section>
 
-    function valueOf(id) {
-      const el = document.getElementById(id);
-      if (!el) return '';
-      if (el.type === 'checkbox') return el.checked ? 'Yes' : 'No';
-      return el.value.trim();
-    }
+    <section id="biobond">
+      <div class="section-kicker">4 · BioBond, Tested</div>
+      <h2>Chapter 1's definition, at its hardest test</h2>
+      <div class="callout"><strong>BioBond:</strong> a relationship, community, or source of support that changes what a person's capacity can reach in the world, without changing the capacity itself. Church mobilization for Hanna's ransom did not make him braver — it changed what his composure could actually accomplish.</div>
+      <label for="biobond_test">Prompt 4.1 — Support and strength, not substitutes</label>
+      <p class="hint">Hanna needed both his own composure and the Church's mobilization. Why couldn't either one have substituted for the other?</p>
+      <textarea id="biobond_test" data-required="true" aria-describedby="biobond_test_error"></textarea>
+      <p class="error-inline" id="biobond_test_error">This still needs a response.</p>
+      <label for="biobond_own">Prompt 4.2 — A real BioBond in your own life</label>
+      <p class="hint">Name one. What does it actually change — your capacity, or what your capacity can reach?</p>
+      <textarea id="biobond_own" data-required="true" aria-describedby="biobond_own_error"></textarea>
+      <p class="error-inline" id="biobond_own_error">This still needs a response.</p>
+    </section>
 
-    function isComplete(el) {
-      if (el.type === 'checkbox') return el.checked;
-      return el.value.trim().length >= 5;
-    }
+    <section id="kant">
+      <div class="section-kicker">5 · Kant's Humanity Formula</div>
+      <h2>Tested against its hardest case</h2>
+      <p>The demand made of Hanna was direct: convert, or be killed. In Kant's terms, this was a demand to treat his own conscience — his capacity to hold a conviction that was genuinely his — as a means to someone else's end, with his life used as the leverage to force the exchange.</p>
+      <label for="kant_applied">Prompt 5.1 — Apply the rule precisely</label>
+      <p class="hint">Why does Kant's rule say a person's rational agency may never be used this way, regardless of what the person demanding it believes they will gain?</p>
+      <textarea id="kant_applied" data-required="true" aria-describedby="kant_applied_error"></textarea>
+      <p class="error-inline" id="kant_applied_error">This still needs a response.</p>
+    </section>
 
-    function updateProgress() {
-      const complete = requiredFields.filter(isComplete).length;
-      const pct = Math.round((complete / requiredFields.length) * 100);
-      progressFill.style.width = pct + '%';
-      progressText.textContent = pct + '% complete (' + complete + ' of ' + requiredFields.length + ' required responses)';
-    }
+    <section id="before">
+      <div class="section-kicker">6 · Before You Reason It Through</div>
+      <h2>A conviction you hold with real certainty</h2>
+      <div class="stop-box">
+        <p><strong class="stop-label">Stop — write before continuing</strong></p>
+        <p>Name a conviction you hold with real certainty. Write, honestly, how certain it feels right now — total, mostly, or something less. Don't examine it yet. Once you move past this section, don't come back and revise this.</p>
+      </div>
+      <label for="conviction_first">Prompt 6.1 — Your conviction and your first sense of its certainty</label>
+      <textarea id="conviction_first" data-required="true" aria-describedby="conviction_first_error"></textarea>
+      <p class="error-inline" id="conviction_first_error">This still needs a response.</p>
+    </section>
 
-    function saveWork() {
-      const data = {};
-      fields.forEach(el => {
-        data[el.id] = el.type === 'checkbox' ? el.checked : el.value;
+    <section id="coherence">
+      <div class="section-kicker">7 · Coherence Is Not the Same Thing as Truth</div>
+      <h2>What total certainty actually proves</h2>
+      <div class="callout">A belief system that is completely internally coherent will always feel, from the inside, like it simply describes reality. This feeling is not, by itself, proof that it matches the world outside it.</div>
+      <label for="coherence_test">Prompt 7.1 — Test your own conviction</label>
+      <p class="hint">What would it actually take for you to tell the difference between your conviction feeling coherent to you, and your conviction actually matching the world outside you?</p>
+      <textarea id="coherence_test" data-required="true" aria-describedby="coherence_test_error"></textarea>
+      <p class="error-inline" id="coherence_test_error">This still needs a response.</p>
+    </section>
+
+    <section id="assembly">
+      <div class="section-kicker">8 · Assembly History</div>
+      <h2>Why someone else's certainty looks unreasonable to you</h2>
+      <p>Every person's Assembly History — the specific sequence of experiences that built their PRF — is different, which is why equally coherent people can hold genuinely different convictions with equal certainty.</p>
+      <label for="assembly_other">Prompt 8.1 — Someone whose certainty you don't share</label>
+      <p class="hint">Think of someone whose deepest convictions differ sharply from yours. What might their Assembly History have been, that made their view feel as obviously coherent to them as yours feels to you?</p>
+      <textarea id="assembly_other" data-required="true" aria-describedby="assembly_other_error"></textarea>
+      <p class="error-inline" id="assembly_other_error">This still needs a response.</p>
+    </section>
+
+    <section id="after">
+      <div class="section-kicker">9 · After Working Through It</div>
+      <h2>Your final answer</h2>
+      <div class="stop-box">
+        <p><strong class="stop-label">Stop — write before continuing</strong></p>
+        <p>Having worked through coherence vs. truth and Assembly History, write your final answer: does your certainty about the conviction you named feel any different now? Not whether you still believe it — whether you can now tell the difference between it feeling coherent and it being tested.</p>
+      </div>
+      <label for="conviction_final">Prompt 9.1 — Your final answer</label>
+      <textarea id="conviction_final" data-required="true" aria-describedby="conviction_final_error"></textarea>
+      <p class="error-inline" id="conviction_final_error">This still needs a response.</p>
+    </section>
+
+    <section id="revision">
+      <div class="section-kicker">10 · The Revision Check</div>
+      <h2>What actually changed?</h2>
+      <label for="revision_check">Prompt 10.1 — Compare your first sense of certainty to your final answer</label>
+      <p class="hint">Name one specific, concrete thing that changed — not "I thought about it more." If nothing changed, say so honestly and explain why your first reaction already held up.</p>
+      <textarea id="revision_check" data-required="true" aria-describedby="revision_check_error"></textarea>
+      <p class="error-inline" id="revision_check_error">This still needs a response.</p>
+      <div class="checkline">
+        <input type="checkbox" id="journalRef">
+        <div><label for="journalRef">Optional: I explored this further in my Personal Ethics Journal.</label>
+        <span class="zero-credit">No description needed. This box is never worth points, in either direction.</span></div>
+      </div>
+    </section>
+
+    <section id="output">
+      <div class="section-kicker">11 · Output Card</div>
+      <h2>Chapter 4 Workbook Output Card</h2>
+      <div class="error-summary" id="errorSummary" tabindex="-1">
+        <h3>Please complete these items before creating the Output Card</h3>
+        <ul id="errorList"></ul>
+      </div>
+      <div class="buttons">
+        <button type="button" id="generateBtn">Generate Output Card</button>
+        <button type="button" class="secondary" id="copyBtn">Copy Output Card</button>
+        <button type="button" class="secondary" id="downloadBtn">Download Output Card</button>
+      </div>
+      <label for="outputText">Output Card</label>
+      <textarea id="outputText" readonly></textarea>
+      <div id="completeMsg" class="success" hidden>You've completed the Chapter 4 workbook — Hanna's case in full, BioBond tested at its hardest, Kant's rule applied precisely, and an honest process trail through coherence and truth.</div>
+    </section>
+  </main>
+</div>
+<footer>Chapter 4 Workbook v2.0 · Ethics and Critical Thinking · Local-only HTML, no data leaves this page.</footer>
+<script>
+(function() {
+  'use strict';
+  const STORAGE_KEY = 'ch4_workbook_v2_persons_duties_dignity';
+  const requiredFields = Array.from(document.querySelectorAll('[data-required="true"]'));
+  const allFields = Array.from(document.querySelectorAll('textarea, select, input[type="checkbox"]'));
+  const barFill = document.getElementById('barFill');
+  const progressText = document.getElementById('progressText');
+  const outputText = document.getElementById('outputText');
+  const completeMsg = document.getElementById('completeMsg');
+  const errorSummary = document.getElementById('errorSummary');
+  const errorList = document.getElementById('errorList');
+  const journalRef = document.getElementById('journalRef');
+
+  function isFilled(el) { if (el.type === 'checkbox') return el.checked; return (el.value || '').trim().length > 0; }
+  function valueOf(id) { const el = document.getElementById(id); if (!el) return ''; return el.type === 'checkbox' ? (el.checked ? 'Yes' : 'No') : (el.value || '').trim(); }
+  function labelFor(id) { const l = document.querySelector('label[for="'+id+'"]'); return l ? l.textContent.replace(/\s+/g,' ').trim() : id; }
+
+  function collect() {
+    const data = {};
+    allFields.forEach(el => { data[el.id] = el.type === 'checkbox' ? el.checked : el.value; });
+    data.savedAt = new Date().toISOString();
+    return data;
+  }
+  function saveDraft() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(collect())); } catch(e) { console.warn('Could not save draft', e); } }
+  function loadDraft() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      allFields.forEach(el => {
+        if (!(el.id in data)) return;
+        if (el.type === 'checkbox') el.checked = Boolean(data[el.id]);
+        else el.value = data[el.id];
       });
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-      updateProgress();
-    }
-
-    function loadWork() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return;
-        const data = JSON.parse(raw);
-        fields.forEach(el => {
-          if (!(el.id in data)) return;
-          if (el.type === 'checkbox') el.checked = Boolean(data[el.id]);
-          else el.value = data[el.id];
-        });
-      } catch (err) {
-        console.warn('Could not load saved workbook data.', err);
-      }
-      updateProgress();
-    }
-
-    function buildOutputCard() {
-      return `Chapter 4 Workbook Output Card — Use vs Mere Use
-
-Case: The Powerful Story
-
-1. First noticing
-${valueOf('case_first_notice')}
-
-2. Ethical concern
-${valueOf('case_ethical_concern')}
-
-3. What a quick judgment might miss
-${valueOf('case_quick_judgment')}
-
-4. Person-as-agent / standpoint
-${valueOf('person_standpoint')}
-
-5. Risk of reducing the person to a tool
-${valueOf('risk_reduction')}
-
-6. Current use vs mere-use diagnosis
-${valueOf('use_status')}
-
-7. Reason for diagnosis
-${valueOf('use_reason')}
-
-8. Who benefits
-${valueOf('benefit_actor')}
-
-9. Burden or risk on the person being used
-${valueOf('burden_person')}
-
-10. Consent check
-${valueOf('consent_quality')}
-
-11. Pressure / manipulation check
-${valueOf('pressure_manipulation')}
-
-12. Privacy risk
-${valueOf('privacy_risk')}
-
-13. Dignity principle
-${valueOf('dignity_principle')}
-
-14. Where responsibility still belongs
-${valueOf('responsibility_location')}
-
-15. What still cannot be concluded
-${valueOf('still_cannot_conclude')}
-
-16. Permission or clarification needed
-${valueOf('repair_permission')}
-
-17. Dignity-preserving route change
-${valueOf('repair_route')}
-
-18. Small but real improvement
-${valueOf('repair_agency')}
-
-Completion note: This Output Card practices the Chapter 4 skill of asking whether a person is being respected as an agent or merely used as a tool.`;
-    }
-
-    function downloadText(filename, text) {
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    function buildWorksheet() {
-      return `Chapter 4 Worksheet — Use vs Mere Use Workbook
-
-Privacy reminder: Do not disclose private, identifying, or sensitive information.
-
-1. What stands out first in The Powerful Story?
-
-2. What seems ethically concerning?
-
-3. What might a quick judgment miss?
-
-4. Whose agency needs to be considered? What might their standpoint include?
-
-5. How could this person be reduced to a tool, example, symbol, obstacle, or persuasive device?
-
-6. Is this respectful use, a risk of mere use, already mere use, or unsure? Explain.
-
-7. Who benefits from using the story, labor, image, information, or role?
-
-8. What burden, risk, loss of control, or exposure might fall on the person being used?
-
-9. What is known, uncertain, or weak about consent?
-
-10. Is there pressure, manipulation, shame, dependency, or lack of a real exit?
-
-11. What privacy or identification risk needs attention?
-
-12. What dignity principle should guide action here?
-
-13. Where does responsibility still belong?
-
-14. What still cannot be concluded from the information available?
-
-15. What would need to be asked, clarified, or renegotiated before using the story?
-
-16. What could be changed so the goal can be pursued without merely using the person?
-
-17. What would count as a small but real dignity-preserving improvement?
-`;
-    }
-
-    document.getElementById('generateBtn').addEventListener('click', () => {
-      outputCard.textContent = buildOutputCard();
-      saveWork();
-    });
-
-    document.getElementById('copyBtn').addEventListener('click', async () => {
-      if (outputCard.textContent.startsWith('Your Chapter 4')) outputCard.textContent = buildOutputCard();
-      try {
-        await navigator.clipboard.writeText(outputCard.textContent);
-        alert('Output Card copied.');
-      } catch (err) {
-        alert('Copy failed. You can select and copy the text manually.');
-      }
-    });
-
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-      const text = outputCard.textContent.startsWith('Your Chapter 4') ? buildOutputCard() : outputCard.textContent;
-      downloadText('chapter4_use_vs_mere_use_output_card.txt', text);
-    });
-
-    document.getElementById('worksheetBtn').addEventListener('click', () => {
-      downloadText('chapter4_use_vs_mere_use_worksheet.txt', buildWorksheet());
-    });
-
-    document.getElementById('clearBtn').addEventListener('click', () => {
-      if (!confirm('Clear saved Chapter 4 workbook responses from this browser?')) return;
-      localStorage.removeItem(STORAGE_KEY);
-      fields.forEach(el => {
-        if (el.type === 'checkbox') el.checked = false;
-        else el.value = '';
+    } catch(e) { console.warn('Could not load draft', e); }
+  }
+  function updateProgress() {
+    const done = requiredFields.filter(isFilled).length;
+    const total = requiredFields.length;
+    const pct = total ? Math.round((done/total)*100) : 0;
+    barFill.style.width = pct + '%';
+    progressText.textContent = done + ' of ' + total + ' required responses completed.';
+    return { done, total };
+  }
+  function clearErrors() {
+    errorList.innerHTML = ''; errorSummary.style.display = 'none';
+    requiredFields.forEach(el => { el.setAttribute('aria-invalid','false'); const e=document.getElementById(el.id+'_error'); if(e) e.style.display='none'; });
+  }
+  function validate() {
+    clearErrors();
+    const missing = requiredFields.filter(el => !isFilled(el));
+    if (missing.length) {
+      missing.forEach(el => {
+        el.setAttribute('aria-invalid','true');
+        const e = document.getElementById(el.id+'_error'); if(e) e.style.display='block';
+        const li = document.createElement('li'); const a = document.createElement('a');
+        a.href = '#' + el.id; a.textContent = labelFor(el.id); li.appendChild(a); errorList.appendChild(li);
       });
-      outputCard.textContent = 'Your Chapter 4 Output Card will appear here.';
-      updateProgress();
-    });
-
-    fields.forEach(el => {
-      el.addEventListener('input', saveWork);
-      el.addEventListener('change', saveWork);
-    });
-
-    loadWork();
-  </script>
+      errorSummary.style.display = 'block'; errorSummary.focus();
+      return false;
+    }
+    return true;
+  }
+  function line(label, value) { return label + '\n' + (value || '[not completed]') + '\n'; }
+  function buildOutput() {
+    return [
+      'Chapter 4 Workbook Output Card — Persons, Duties, Dignity',
+      '',
+      line('Case reading — what this case asks you not to conclude:', valueOf('case_read')),
+      line('The suppression gap, at its most extreme:', valueOf('gap_distinction')),
+      line('BioBond, tested — support and strength as non-substitutes:', valueOf('biobond_test')),
+      line('A real BioBond in your own life:', valueOf('biobond_own')),
+      line('Kant\'s Humanity Formula, applied:', valueOf('kant_applied')),
+      '',
+      line('Before you reason it through — your conviction and first sense of certainty:', valueOf('conviction_first')),
+      line('Coherence Is Not the Same Thing as Truth — testing your own conviction:', valueOf('coherence_test')),
+      line('Assembly History — someone whose certainty you don\'t share:', valueOf('assembly_other')),
+      line('After working through it — your final answer:', valueOf('conviction_final')),
+      line('The Revision Check — what actually changed:', valueOf('revision_check')),
+      '',
+      'Optional Journal reference: ' + (journalRef.checked ? 'Yes' : 'No')
+    ].join('\n');
+  }
+  function download(filename, text) {
+    const blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+  }
+  function worksheetText() {
+    return [
+      'Chapter 4 Workbook Worksheet v2.0 — Persons, Duties, Dignity',
+      '',
+      'Bishop Saad Sirop Hanna: kidnapped August 15, 2006; held 28 days; released September 11, 2006, after Church mobilization. "I will not become a Muslim, and I fully know that you are going to kill me for it."',
+      '',
+      '1. What does this case ask you not to conclude from it, and why does that caution matter?',
+      '',
+      '2. The suppression gap at its most extreme — why are raw capacity and permitted expression not the same measurement?',
+      '',
+      '3. BioBond, tested — why couldn\'t Hanna\'s own composure and the Church\'s mobilization have substituted for each other?',
+      '4. Name a real BioBond in your own life. What does it change — your capacity, or what your capacity can reach?',
+      '',
+      '5. Kant\'s Humanity Formula — why may a person\'s rational agency never be used as leverage, regardless of what the demander believes they\'ll gain?',
+      '',
+      '6. STOP — before continuing: name a conviction you hold with real certainty, and your honest first sense of how certain it feels. Do not revise this after moving on.',
+      '',
+      '7. Coherence vs. Truth — what would it actually take to tell the difference between your conviction feeling coherent and it actually matching the world outside you?',
+      '',
+      '8. Assembly History — think of someone whose convictions differ sharply from yours. What might their Assembly History have been?',
+      '',
+      '9. STOP — after working through it: your final answer.',
+      '',
+      '10. Revision Check — what specifically changed? If nothing changed, say so honestly.',
+      '',
+      'Optional: note here if you explored this further in your Personal Ethics Journal (not graded).'
+    ].join('\n');
+  }
+  document.addEventListener('input', e => { if (allFields.includes(e.target)) { updateProgress(); saveDraft(); } });
+  document.addEventListener('change', e => { if (allFields.includes(e.target)) { updateProgress(); saveDraft(); } });
+  document.getElementById('saveBtn').addEventListener('click', () => { saveDraft(); alert('Draft saved in this browser.'); });
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    if (!confirm('Clear this saved Chapter 4 draft from this browser?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    allFields.forEach(el => { if (el.type === 'checkbox') el.checked = false; else el.value = ''; });
+    outputText.value = ''; completeMsg.hidden = true; clearErrors(); updateProgress();
+  });
+  document.getElementById('generateBtn').addEventListener('click', () => {
+    if (!validate()) return;
+    outputText.value = buildOutput();
+    completeMsg.hidden = false;
+    saveDraft();
+  });
+  document.getElementById('copyBtn').addEventListener('click', async () => {
+    if (!outputText.value.trim()) outputText.value = buildOutput();
+    try { await navigator.clipboard.writeText(outputText.value); alert('Output Card copied.'); }
+    catch(e) { outputText.select(); document.execCommand('copy'); alert('Output Card selected/copied.'); }
+  });
+  document.getElementById('downloadBtn').addEventListener('click', () => {
+    if (!outputText.value.trim()) outputText.value = buildOutput();
+    download('chapter_4_output_card.txt', outputText.value);
+  });
+  document.getElementById('downloadWorksheet').addEventListener('click', () => {
+    download('chapter_4_workbook_worksheet.txt', worksheetText());
+  });
+  loadDraft();
+  updateProgress();
+}());
+</script>
 </body>
 </html>
